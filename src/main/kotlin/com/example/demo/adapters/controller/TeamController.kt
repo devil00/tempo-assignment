@@ -19,6 +19,9 @@ import javax.validation.constraints.NotBlank
 @RestController
 @RequestMapping("/teams")
 @Validated
+/**
+ * Resource to define the endpoints to manipulate team entity.
+ */
 class TeamController(val memberShipService: MemberShipService) {
     private val logger = KotlinLogging.logger {}
 

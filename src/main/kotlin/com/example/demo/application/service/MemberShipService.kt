@@ -26,6 +26,12 @@ class MemberShipService(@Autowired private val memberShipPersistencePort: Member
     }
 
     @Transactional
+    /** Create memmbership by assigning role to the user and allocating the user to the given team identified by the team-id.
+     * @param teamId
+     * @param userId
+     * @param updateRoleRequest instance of {@link UpdateRoleRequest}
+     * @return {@link MemberShipDto}
+     */
     override fun addMemberShip(teamId: String, userId: String, updateRoleRequest: UpdateRoleRequest): MemberShipDto? {
         logger.info { "Assigning membership for teamId {$teamId}, userId: ${userId} , roleId: ${updateRoleRequest.roleId}" }
         var roleDto = roleService.getRoleById(updateRoleRequest.roleId)

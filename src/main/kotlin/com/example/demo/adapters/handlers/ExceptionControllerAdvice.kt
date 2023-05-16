@@ -13,8 +13,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import java.time.Clock
 import javax.validation.ConstraintViolationException
 
+/**
+ * Controller advice to handle all the exceptions and send the appropriate response for them.
+ */
 @ControllerAdvice
 class ExceptionControllerAdvice {
+
+    /**
+     * @param ex instance of {@link MemberNotFoundException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handleMemberNotFoundException(ex: MemberNotFoundException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(
@@ -24,6 +32,10 @@ class ExceptionControllerAdvice {
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * @param ex instance of {@link MemberShipNotFoundException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handleMemberShipNotFoundException(ex: MemberShipNotFoundException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(
@@ -33,6 +45,10 @@ class ExceptionControllerAdvice {
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * @param ex instance of {@link RoleNotFoundException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handleRoleNotFoundException(ex: RoleNotFoundException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(
@@ -42,6 +58,10 @@ class ExceptionControllerAdvice {
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
+    /**
+     * @param ex instance of {@link MethodArgumentNotValidException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handleValidationException(ex: MethodArgumentNotValidException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(
@@ -53,6 +73,10 @@ class ExceptionControllerAdvice {
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
 
+    /**
+     * @param ex instance of {@link PSQLException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handlePostgresqlException(ex: PSQLException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(
@@ -63,6 +87,10 @@ class ExceptionControllerAdvice {
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
 
+    /**
+     * @param ex instance of {@link ConstraintViolationException}
+     * @return {@link ErrorMessageModel}
+     */
     @ExceptionHandler
     fun handleConstraintViolationException(ex: ConstraintViolationException): ResponseEntity<ErrorMessageModel> {
         val errorMessage = ErrorMessageModel(

@@ -9,11 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+/**
+ * Service responsible for defining operations for the user entity
+ */
 @Service
 class MemberService(@Autowired private val memberPersistencePort: MemberPersistencePort, @Autowired private val roleService: RoleService) : MemberServicePort {
     private val logger = KotlinLogging.logger {}
 
     @Transactional
+    /** Add  the given role to the useridentified by the user-id.
+     * @param teamId
+     * @param userId
+     * @return {@link MemberShipDto}
+     */
     override fun addRole(userId: String, roleId: Int): UserDto {
         logger.info { "Adding roleId: ${roleId} to user: ${userId}" }
         val member = getMemberById(userId)
